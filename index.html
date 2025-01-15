@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Virtual Reality City Tours</title>
+    <!-- Load A-Frame and components -->
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/IdeaSpaceVR/aframe-particle-system-component@1.0.0/dist/aframe-particle-system-component.min.js"></script>
+    <!-- Load our script and styles -->
+    <script src="src/main.js" type="module"></script>
+    <link rel="stylesheet" href="src/styles.css">
+  </head>
+  <body>
+    <div id="cityMenu">
+      <button onclick="window.showCity('newyork')">New York</button>
+      <button onclick="window.showCity('dubai')">Dubai</button>
+      <button onclick="window.showCity('paris')">Paris</button>
+      <button onclick="window.showCity('tokyo')">Tokyo</button>
+    </div>
+    <a-scene>
+      <a-assets>
+        <!-- High-quality 360° panoramic images -->
+        <img id="newyork-sky" src="https://images.pexels.com/photos/2224424/pexels-photo-2224424.jpeg" crossorigin="anonymous">
+        <img id="dubai-sky" src="https://images.pexels.com/photos/3214995/pexels-photo-3214995.jpeg" crossorigin="anonymous">
+        <img id="paris-sky" src="https://images.pexels.com/photos/699466/pexels-photo-699466.jpeg" crossorigin="anonymous">
+        <img id="tokyo-sky" src="https://images.pexels.com/photos/4013735/pexels-photo-4013735.jpeg" crossorigin="anonymous">
+      </a-assets>
+
+      <!-- Environment -->
+      <a-sky id="newyork-scene" src="#newyork-sky" rotation="0 -90 0" visible="true"></a-sky>
+      <a-sky id="dubai-scene" src="#dubai-sky" rotation="0 -90 0" visible="false"></a-sky>
+      <a-sky id="paris-scene" src="#paris-sky" rotation="0 -90 0" visible="false"></a-sky>
+      <a-sky id="tokyo-scene" src="#tokyo-sky" rotation="0 -90 0" visible="false"></a-sky>
+
+      <!-- New York -->
+      <a-entity id="newyork-info" visible="true">
+        <a-sphere position="-1 1.25 -5" radius="0.2" color="#FF4444"
+          event-set__enter="_event: mouseenter; color: #FF8888"
+          event-set__leave="_event: mouseleave; color: #FF4444">
+          <a-text value="Empire State Building\nHeight: 381m\nClick to learn more" position="1 0 0" scale="0.8 0.8 0.8" color="white" wrap-count="24" class="landmark-info"></a-text>
+        </a-sphere>
+        <a-sphere position="2 1.8 -4" radius="0.2" color="#4444FF"
+          event-set__enter="_event: mouseenter; color: #8888FF"
+          event-set__leave="_event: mouseleave; color: #4444FF">
+          <a-text value="Times Square\nVisitors per day: 360,000" position="1 0 0" scale="0.8 0.8 0.8" color="white" wrap-count="24" class="landmark-info"></a-text>
+        </a-sphere>
+      </a-entity>
+
+      <!-- Dubai -->
+      <a-entity id="dubai-info" visible="false">
+        <a-sphere position="-2 2.2 -3.8" radius="0.2" color="#FF4444"
+          event-set__enter="_event: mouseenter; color: #FF8888"
+          event-set__leave="_event: mouseleave; color: #FF4444">
+          <a-text value="Burj Khalifa\nHeight: 828m\nTallest building in the world" position="1 0 0" scale="0.8 0.8 0.8" color="white" wrap-count="24" class="landmark-info"></a-text>
+        </a-sphere>
+        <a-sphere position="1.8 1.6 -3.2" radius="0.2" color="#4444FF"
+          event-set__enter="_event: mouseenter; color: #8888FF"
+          event-set__leave="_event: mouseleave; color: #4444FF">
+          <a-text value="Palm Jumeirah\nLargest man-made island\nIslands: 17" position="1 0 0" scale="0.8 0.8 0.8" color="white" wrap-count="24" class="landmark-info"></a-text>
+        </a-sphere>
+      </a-entity>
+
+      <!-- Paris -->
+      <a-entity id="paris-info" visible="false">
+        <a-sphere position="-1.5 2 -4" radius="0.2" color="#FF4444"
+          event-set__enter="_event: mouseenter; color: #FF8888"
+          event-set__leave="_event: mouseleave; color: #FF4444">
+          <a-text value="Eiffel Tower\nHeight: 324m\nBuilt in 1889" position="1 0 0" scale="0.8 0.8 0.8" color="white" wrap-count="24" class="landmark-info"></a-text>
+        </a-sphere>
+        <a-sphere position="2 1.5 -3.5" radius="0.2" color="#4444FF"
+          event-set__enter="_event: mouseenter; color: #8888FF"
+          event-set__leave="_event: mouseleave; color: #4444FF">
+          <a-text value="Louvre Museum\nVisitors per year: 9.6M\nWorld's largest art museum" position="1 0 0" scale="0.8 0.8 0.8" color="white" wrap-count="24" class="landmark-info"></a-text>
+        </a-sphere>
+      </a-entity>
+
+      <!-- Tokyo -->
+      <a-entity id="tokyo-info" visible="false">
+        <a-sphere position="-2 2 -4" radius="0.2" color="#FF4444"
+          event-set__enter="_event: mouseenter; color: #FF8888"
+          event-set__leave="_event: mouseleave; color: #FF4444">
+          <a-text value="Tokyo Skytree\nHeight: 634m\nTallest tower in the world" position="1 0 0" scale="0.8 0.8 0.8" color="white" wrap-count="24" class="landmark-info"></a-text>
+        </a-sphere>
+        <a-sphere position="1.5 1.8 -3.5" radius="0.2" color="#4444FF"
+          event-set__enter="_event: mouseenter; color: #8888FF"
+          event-set__leave="_event: mouseleave; color: #4444FF">
+          <a-text value="Shibuya Crossing\nPedestrians per day: 2.4M\nBusiest crossing in the world" position="1 0 0" scale="0.8 0.8 0.8" color="white" wrap-count="24" class="landmark-info"></a-text>
+        </a-sphere>
+      </a-entity>
+
+      <!-- Navigation Controls -->
+      <a-entity position="0 1.6 0">
+        <a-camera look-controls wasd-controls>
+          <a-cursor color="#FFFFFF"
+            animation__click="property: scale; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150; startEvents: click"
+            animation__fusing="property: scale; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500; startEvents: fusing"></a-cursor>
+        </a-camera>
+      </a-entity>
+
+      <!-- Ambient Light -->
+      <a-light type="ambient" intensity="1.5"></a-light>
+      <a-light type="directional" position="-1 1 0" intensity="0.5"></a-light>
+    </a-scene>
+  </body>
+</html>
